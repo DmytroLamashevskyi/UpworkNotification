@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="UpworkNotification.Controles.MessageControle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UpworkNotification.Controles"
+             mc:Ignorable="d"  MinWidth="300" MinHeight="200"
+             >
+    <Grid Background="#FFC64545">
+            
+    </Grid>
+</UserControl>
