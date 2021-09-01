@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using UpworkNotification.Controles;
+using UpworkNotification.Controllers;
 
 namespace UpworkNotification
 {
@@ -27,11 +28,15 @@ namespace UpworkNotification
         {
             InitializeComponent();
         }
-         
+          
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            myNotifyIcon.ShowCustomBalloon(new MessageControle(), PopupAnimation.Slide, 3000); 
+
+            RssController rss = new RssController();
+            var list = rss.Parse(SettingsController.Instance.RssUrl);
+            
+            myNotifyIcon.ShowCustomBalloon(new MessageControle().ShowData(list.FirstOrDefault()), PopupAnimation.Slide, SettingsController.Instance.PanelTimeout); 
         }
     }
 }

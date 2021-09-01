@@ -3,10 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:UpworkNotification.Controles"
-             mc:Ignorable="d"  MinWidth="300" MinHeight="200"
+             xmlns:local="clr-namespace:UpworkNotification.Controles" xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
+             mc:Ignorable="d"  MinWidth="300" MinHeight="200" MaxWidth="400"
              >
-    <Grid Background="#FFC64545">
-            
+    <Grid  Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Background="#3c8224" Grid.Row="0" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="{x:Null}" x:Name="TitleBorder"  MinHeight="25">
+                <TextBlock  x:Name="Title" VerticalAlignment="Center" Foreground="White"  TextAlignment="Center" TextWrapping="WrapWithOverflow"  FontWeight="Bold" FontSize="14" FontFamily="Times New Roman" Padding="10,0,10,0" >Header</TextBlock>
+            </Border>
+            <Button Grid.Column="1" Height="{Binding ActualHeight, ElementName=TitleBorder}" Background="{x:Null}">
+                <Image Source="/Resources/Close.png" Stretch="Fill" StretchDirection="DownOnly" />
+            </Button>
+        </Grid>
+        <TextBlock Grid.Row="1"  Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="Summary" TextWrapping="Wrap" Padding="10,20,10,15" FontFamily="Times New Roman"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="3" x:Name="Rate" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
+
+        <ItemsControl Grid.Row="3"  x:Name="Skils" Grid.ColumnSpan="4" ItemsSource="{Binding JobData}" Focusable="False" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Grid.Row="3" Background="#5979d9" BorderThickness="1" CornerRadius="8" >
+                        <TextBlock  VerticalAlignment="Center" Text="{Binding}" Padding="8,0,8,0" Foreground="White" FontWeight="Bold" FontSize="10"/>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate> 
+        </ItemsControl>
+
+        <TextBlock Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" x:Name="PostDate" FontWeight="Bold" Margin="15,0,18,0" VerticalAlignment="Center"/>
+
+        <Border Grid.Row="4" Grid.Column="1" CornerRadius="5" BorderBrush="#3c8224" BorderThickness="2" >
+            <Button Grid.Row="4" Grid.Column="1" BorderThickness="0" Foreground="White" BorderBrush="{x:Null}" Background="#FF3C8224" Click="Button_Click">Open</Button>
+        </Border> 
     </Grid>
 </UserControl>

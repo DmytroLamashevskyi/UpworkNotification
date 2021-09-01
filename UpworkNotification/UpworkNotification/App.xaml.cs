@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using UpworkNotification.Controllers;
 
 namespace UpworkNotification
 {
@@ -13,5 +14,14 @@ namespace UpworkNotification
     /// </summary>
     public partial class App : Application
     {
+        private void OnExit(object sender, ExitEventArgs e)
+        { 
+            SettingsController.Instance.WriteSettings();
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        { 
+            SettingsController.Instance.ReadSettings();
+        }
     }
 }
