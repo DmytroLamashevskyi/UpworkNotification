@@ -22,5 +22,14 @@ namespace UpworkNotification.Models
 
         public string HourlyRange { set; get; }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is JobPost)
+                return (obj as JobPost).UrlId == this.UrlId;
+
+
+            return base.Equals(obj);
+        }
+
     }
 }

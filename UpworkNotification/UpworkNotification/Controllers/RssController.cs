@@ -10,16 +10,20 @@ using UpworkNotification.Models;
 namespace UpworkNotification.Controllers
 {
     public class RssController
-    {  
-        public int LastHash { private set; get; }
+    {
+        public JobPost LastJob { private set; get; } = new JobPost();
         public List<JobPost> Parse(string url)
         {
             var result = new List<JobPost>();
             using var reader = XmlReader.Create(url);
             var feed = SyndicationFeed.Load(reader);
 
-            if (CheckHash(LastHash, feed.GetHashCode()))
-                LastHash = feed.GetHashCode();
+            var firstJob = StringParser(feed.Items.FirstOrDefault());
+            if (LastJob.Equals(firstJob))
+            {
+                return null;
+            }
+            LastJob = firstJob;
 
             foreach (var item in feed.Items)
             {
@@ -71,11 +75,6 @@ namespace UpworkNotification.Controllers
 
             return result;
         }
-
-        private bool CheckHash(int first, int second)
-        {
-            return first != second;
-
-        }
+         
     }
 }

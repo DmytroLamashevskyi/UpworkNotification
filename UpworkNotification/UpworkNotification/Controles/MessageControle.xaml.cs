@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UpworkNotification.Controllers;
 using UpworkNotification.Models;
 
 namespace UpworkNotification.Controles
@@ -26,6 +27,7 @@ namespace UpworkNotification.Controles
         public MessageControle()
         {
             InitializeComponent();
+
         }
         public JobPost JobData { get; private set; }
         public MessageControle ShowData(JobPost data)
@@ -38,6 +40,22 @@ namespace UpworkNotification.Controles
             foreach (var skil in data.Skils)
                 Skils.Items.Add(skil); 
             PostDate.Text = data.Date.ToString();
+
+
+            var timer = new SmartDispatcherTimer();
+            TimeOut.Maximum = SettingsController.Instance.PanelTimeout;
+            timer.IsReentrant = false;
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.TickTask = async () =>
+            { 
+                TimeOut.Value += timer.Interval.TotalMilliseconds; 
+                if(TimeOut.Value == TimeOut.Maximum)
+                {
+                    timer.Stop();
+                }
+            };
+            timer.Start();
+
             return this;
         }
 
