@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlzEx.Theming;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,7 +21,8 @@ namespace UpworkNotification
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
-        { 
+        {
+            ThemeManager.Current.ChangeTheme(this, "Light.Blue");
             SettingsController.Instance.ReadSettings();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace UpworkNotification
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     { 
         public MainWindow()
         {
@@ -34,8 +35,7 @@ namespace UpworkNotification
         {
 
             RssController rss = new RssController();
-            var list = rss.Parse(SettingsController.Instance.RssUrl);
-            
+            var list = rss.Parse(SettingsController.Instance.RssUrl); 
             myNotifyIcon.ShowCustomBalloon(new MessageControle().ShowData(list.FirstOrDefault()), PopupAnimation.Slide, SettingsController.Instance.PanelTimeout); 
         }
     }
